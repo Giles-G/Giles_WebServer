@@ -137,7 +137,7 @@ void ring_log::persist() {
         
         /* 持久化：将缓冲区内容写入到文件 */
         _prst_buf->persist(_fp);
-        fflush(_fp);
+        // fflush(_fp);
 
         pthread_mutex_lock(&_mutex);
         _prst_buf->clear();
