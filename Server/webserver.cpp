@@ -1,5 +1,10 @@
 #include "webserver.hpp"
 
+
+/**
+ * @brief WebServer构造函数：构造http_conn对象数组，生成m_root根目录路径，生成定时器数据
+ * @return null
+ */
 WebServer::WebServer()
 {
     //http_conn类对象
@@ -17,6 +22,10 @@ WebServer::WebServer()
     users_timer = new client_data[MAX_FD];
 }
 
+/**
+ * @brief WebServer析构函数，关闭文件描述符并释放相关资源
+ * @return null
+ */
 WebServer::~WebServer()
 {
     close(m_epollfd);
@@ -28,6 +37,10 @@ WebServer::~WebServer()
     delete m_pool;
 }
 
+/**
+ * @brief 初始化服务器相关参数
+ * @return null
+ */
 void WebServer::init(int port, string user, string passWord, string databaseName, int log_write, 
                      int opt_linger, int trigmode, int sql_num, int thread_num, int close_log, int actor_model)
 {
@@ -44,6 +57,10 @@ void WebServer::init(int port, string user, string passWord, string databaseName
     m_actormodel = actor_model;
 }
 
+/**
+ * @brief 针对监听(listen)和连接(connection)设置et与lt的组合触发模式
+ * @return null
+ */
 void WebServer::trig_mode()
 {
     //LT + LT
@@ -72,6 +89,10 @@ void WebServer::trig_mode()
     }
 }
 
+/**
+ * @brief 初始化日志 
+ * @return null
+ */
 void WebServer::log_write()
 {
     if (0 == m_close_log)
@@ -81,6 +102,10 @@ void WebServer::log_write()
     }
 }
 
+/**
+ * @brief 初始化数据连接池 
+ * @return null
+ */
 void WebServer::sql_pool()
 {
     //初始化数据库连接池
@@ -91,12 +116,20 @@ void WebServer::sql_pool()
     users->initmysql_result(m_connPool);
 }
 
+/**
+ * @brief 初始化线程池，即为服务器分配一个全局唯一的线程池对象
+ * @return null
+ */
 void WebServer::thread_pool()
 {
     //线程池
     m_pool = new threadpool<http_conn>(m_actormodel, m_connPool, m_thread_num);
 }
 
+/**
+ * @brief 初始化日志 
+ * @return null
+ */
 void WebServer::eventListen()
 {
     //网络编程基础步骤

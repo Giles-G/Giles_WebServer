@@ -34,6 +34,10 @@ public:
     void log_write();
     void trig_mode();
     void eventListen();
+
+    /**
+     * @brief webserver主要的工作函数
+     */
     void eventLoop();
     void timer(int connfd, struct sockaddr_in client_address);
     void adjust_timer(util_timer *timer);
@@ -53,7 +57,7 @@ public:
 
     int m_pipefd[2];
     int m_epollfd;
-    http_conn *users;
+    http_conn *users; // 存放多个客户端的socket连接
 
     //数据库相关
     connection_pool *m_connPool;

@@ -32,6 +32,7 @@ void connection_pool::init(string url, string User, string PassWord, string DBNa
 	m_DatabaseName = DBName;
 	m_close_log = close_log;
 
+	/* 创建MaxConn条连接放入连接list中 */
 	for (int i = 0; i < MaxConn; i++)
 	{
 		MYSQL *con = NULL;
@@ -58,7 +59,6 @@ void connection_pool::init(string url, string User, string PassWord, string DBNa
 	m_MaxConn = m_FreeConn;
 }
 
-
 //当有请求时，从数据库连接池中返回一个可用连接，更新使用和空闲连接数
 MYSQL *connection_pool::GetConnection()
 {
@@ -81,7 +81,7 @@ MYSQL *connection_pool::GetConnection()
 	return con;
 }
 
-//释放当前使用的连接
+//释放当前使用的连接: 把当前mysql句柄放回list即可
 bool connection_pool::ReleaseConnection(MYSQL *con)
 {
 	if (NULL == con)
@@ -99,7 +99,7 @@ bool connection_pool::ReleaseConnection(MYSQL *con)
 	return true;
 }
 
-//销毁数据库连接池
+//销毁数据库连接池：关闭所有mysql连接，释放资源
 void connection_pool::DestroyPool()
 {
 

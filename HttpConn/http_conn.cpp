@@ -17,6 +17,10 @@ const char *error_500_form = "There was an unusual problem serving the request f
 locker m_lock;
 map<string, string> users;
 
+/**
+ * @brief 将数据库中所有的用户名和密码都放入哈希表user中
+ * @return null
+ */
 void http_conn::initmysql_result(connection_pool *connPool)
 {
     //先从连接池中取一个连接
@@ -47,21 +51,30 @@ void http_conn::initmysql_result(connection_pool *connPool)
     }
 }
 
-//对文件描述符设置非阻塞
-int setnonblocking(int fd)
-{
+/**
+ * @brief 将文件设置为非阻塞
+ * @return 返回文件描述符之前的状态标识
+ */
+int setnonblocking(int fd) {
+    /* F_GETFL获取文件的状态标识 */
     int old_option = fcntl(fd, F_GETFL);
+    /* 将该文件描述符设置为非阻塞 */
     int new_option = old_option | O_NONBLOCK;
+    /* F_SETFL设置文件的状态标志 */
     fcntl(fd, F_SETFL, new_option);
     return old_option;
 }
 
-//将内核事件表注册读事件，ET模式，选择开启EPOLLONESHOT
+/**
+ * @brief 将内核事件表注册读事件，ET或者LT模式，选择开启EPOLLONESHOT
+ * @return null
+ */
 void addfd(int epollfd, int fd, bool one_shot, int TRIGMode)
 {
     epoll_event event;
     event.data.fd = fd;
 
+    // 1表示为ET模式，即边沿触发
     if (1 == TRIGMode)
         event.events = EPOLLIN | EPOLLET | EPOLLRDHUP;
     else
@@ -80,7 +93,7 @@ void removefd(int epollfd, int fd)
     close(fd);
 }
 
-//将事件重置为EPOLLONESHOT
+// 修改epollfd上的注册事件
 void modfd(int epollfd, int fd, int ev, int TRIGMode)
 {
     epoll_event event;
@@ -97,7 +110,6 @@ void modfd(int epollfd, int fd, int ev, int TRIGMode)
 int http_conn::m_user_count = 0;
 int http_conn::m_epollfd = -1;
 
-//关闭连接，关闭一个连接，客户总量减一
 void http_conn::close_conn(bool real_close)
 {
     if (real_close && (m_sockfd != -1))
@@ -109,7 +121,6 @@ void http_conn::close_conn(bool real_close)
     }
 }
 
-//初始化连接,外部调用初始化套接字地址
 void http_conn::init(int sockfd, const sockaddr_in &addr, char *root, int TRIGMode,
                      int close_log, string user, string passwd, string sqlname)
 {
@@ -131,8 +142,6 @@ void http_conn::init(int sockfd, const sockaddr_in &addr, char *root, int TRIGMo
     init();
 }
 
-//初始化新接受的连接
-//check_state默认为分析请求行状态
 void http_conn::init()
 {
     mysql = NULL;
@@ -159,28 +168,36 @@ void http_conn::init()
     memset(m_real_file, '\0', FILENAME_LEN);
 }
 
-//从状态机，用于分析出一行内容
-//返回值为行的读取状态，有LINE_OK,LINE_BAD,LINE_OPEN
 http_conn::LINE_STATUS http_conn::parse_line()
 {
     char temp;
+    /*checked_index指向buffer（应用程序的读缓冲区）中当前正在分析的字节，read_index指向buffer中客户数据的尾部的下一字节。
+    buffer中第0～checked_index字节都已分析完毕，第checked_index～(read_index-1)字节由下面的循环挨个分析*/
     for (; m_checked_idx < m_read_idx; ++m_checked_idx)
     {
+         /*获得当前要分析的字节*/
         temp = m_read_buf[m_checked_idx];
+         /*如果当前的字节是“\r”，即回车符，则说明可能读取到一个完整的行*/
         if (temp == '\r')
         {
+             /*如果“\r”字符碰巧是目前buffer中的最后一个已经被读入的客户数据，那么这次分析没有读取到一个完整的行，
+            返回LINE_OPEN以表示还需要继续读取客户数据才能进一步分析*/
             if ((m_checked_idx + 1) == m_read_idx)
                 return LINE_OPEN;
+            /*如果下一个字符是“\n”，则说明我们成功读取到一个完整的行*/
             else if (m_read_buf[m_checked_idx + 1] == '\n')
             {
                 m_read_buf[m_checked_idx++] = '\0';
                 m_read_buf[m_checked_idx++] = '\0';
                 return LINE_OK;
             }
+            /*否则的话，说明客户发送的HTTP请求存在语法问题*/
             return LINE_BAD;
         }
+        /*如果当前的字节是“\n”，即换行符，则也说明可能读取到一个完整的行*/
         else if (temp == '\n')
         {
+            /* 这里不能为0，是因为这一行不能只有\r\n */
             if (m_checked_idx > 1 && m_read_buf[m_checked_idx - 1] == '\r')
             {
                 m_read_buf[m_checked_idx - 1] = '\0';
@@ -190,11 +207,10 @@ http_conn::LINE_STATUS http_conn::parse_line()
             return LINE_BAD;
         }
     }
+    /*如果所有内容都分析完毕也没遇到“\r”字符，则返回LINE_OPEN，表示还需要继续读取客户数据才能进一步分析*/
     return LINE_OPEN;
 }
 
-//循环读取客户数据，直到无数据可读或对方关闭连接
-//非阻塞ET工作模式下，需要一次性将数据读完
 bool http_conn::read_once()
 {
     if (m_read_idx >= READ_BUFFER_SIZE)
@@ -203,7 +219,7 @@ bool http_conn::read_once()
     }
     int bytes_read = 0;
 
-    //LT读取数据
+    //LT读取数据：系统会多次通知信息到来，所以不需要循环读取
     if (0 == m_TRIGMode)
     {
         bytes_read = recv(m_sockfd, m_read_buf + m_read_idx, READ_BUFFER_SIZE - m_read_idx, 0);
@@ -216,12 +232,14 @@ bool http_conn::read_once()
 
         return true;
     }
-    //ET读数据
+    //ET读数据：因为只通知一次信息到来，所以必须一次性的循环读取缓冲区所有的内容
     else
     {
         while (true)
         {
             bytes_read = recv(m_sockfd, m_read_buf + m_read_idx, READ_BUFFER_SIZE - m_read_idx, 0);
+            // 因为是死循环，将循环读取缓冲区读完了之后，recv还会继续读取，知道recv返回错误信息
+            // 如果错误信息是EAGAIN或者EWOULDBLOCK，那就表示读取完成。
             if (bytes_read == -1)
             {
                 if (errno == EAGAIN || errno == EWOULDBLOCK)
@@ -238,15 +256,19 @@ bool http_conn::read_once()
     }
 }
 
-//解析http请求行，获得请求方法，目标url及http版本号
 http_conn::HTTP_CODE http_conn::parse_request_line(char *text)
 {
+    /* strpbrk是在源字符串（s1）中找出最先含有搜索字符串（s2）中任一字符的位置并返回，若找不到则返回空指针 */
     m_url = strpbrk(text, " \t");
+
+    /*如果请求行中没有空白字符或“\t”字符，则HTTP请求必有问题*/
     if (!m_url)
     {
         return BAD_REQUEST;
     }
-    *m_url++ = '\0';
+    
+    /* 接下来就分别查询方法、URL、http版本 */
+    *m_url++ = '\0'; /* 尾部加'\0'形成字符串 */
     char *method = text;
     if (strcasecmp(method, "GET") == 0)
         m_method = GET;
@@ -257,14 +279,19 @@ http_conn::HTTP_CODE http_conn::parse_request_line(char *text)
     }
     else
         return BAD_REQUEST;
+
+    /* 返回字符串s开头连续包含字符串accept内的字符数目。其实就是去除开头的空格*/
     m_url += strspn(m_url, " \t");
     m_version = strpbrk(m_url, " \t");
     if (!m_version)
         return BAD_REQUEST;
     *m_version++ = '\0';
     m_version += strspn(m_version, " \t");
+    /*仅支持HTTP/1.1*/
     if (strcasecmp(m_version, "HTTP/1.1") != 0)
         return BAD_REQUEST;
+
+    /*检查URL是否合法；请求行中的url可能是类似https://cn.bing.com/search的格式，也有可能直接是/开头*/
     if (strncasecmp(m_url, "http://", 7) == 0)
     {
         m_url += 7;
@@ -282,13 +309,15 @@ http_conn::HTTP_CODE http_conn::parse_request_line(char *text)
     //当url为/时，显示判断界面
     if (strlen(m_url) == 1)
         strcat(m_url, "judge.html");
+
+    /*HTTP请求行处理完毕，状态转移到头部字段的分析*/
     m_check_state = CHECK_STATE_HEADER;
     return NO_REQUEST;
 }
 
-//解析http请求的一个头部信息
 http_conn::HTTP_CODE http_conn::parse_headers(char *text)
 {
+    /*遇到一个空行，说明我们得到了一个正确的HTTP请求*/
     if (text[0] == '\0')
     {
         if (m_content_length != 0)
@@ -298,22 +327,22 @@ http_conn::HTTP_CODE http_conn::parse_headers(char *text)
         }
         return GET_REQUEST;
     }
-    else if (strncasecmp(text, "Connection:", 11) == 0)
+    else if (strncasecmp(text, "Connection:", 11) == 0) // Connection字段
     {
         text += 11;
         text += strspn(text, " \t");
-        if (strcasecmp(text, "keep-alive") == 0)
+        if (strcasecmp(text, "keep-alive") == 0) // keep-alive字段
         {
             m_linger = true;
         }
     }
-    else if (strncasecmp(text, "Content-length:", 15) == 0)
+    else if (strncasecmp(text, "Content-length:", 15) == 0) // Content-length字段
     {
         text += 15;
         text += strspn(text, " \t");
         m_content_length = atol(text);
     }
-    else if (strncasecmp(text, "Host:", 5) == 0)
+    else if (strncasecmp(text, "Host:", 5) == 0) // Host字段
     {
         text += 5;
         text += strspn(text, " \t");
@@ -341,10 +370,11 @@ http_conn::HTTP_CODE http_conn::parse_content(char *text)
 
 http_conn::HTTP_CODE http_conn::process_read()
 {
-    LINE_STATUS line_status = LINE_OK;
-    HTTP_CODE ret = NO_REQUEST;
+    LINE_STATUS line_status = LINE_OK; /*记录当前行的读取状态*/
+    HTTP_CODE ret = NO_REQUEST; /*记录HTTP请求的处理结果*/
     char *text = 0;
 
+    /*主状态机循环过程，用于从buffer中取出所有完整的行*/
     while ((m_check_state == CHECK_STATE_CONTENT && line_status == LINE_OK) || ((line_status = parse_line()) == LINE_OK))
     {
         text = get_line();
@@ -352,14 +382,14 @@ http_conn::HTTP_CODE http_conn::process_read()
         LOG_INFO("%s", text);
         switch (m_check_state)
         {
-        case CHECK_STATE_REQUESTLINE:
+        case CHECK_STATE_REQUESTLINE: /*第一个状态，分析请求行*/
         {
             ret = parse_request_line(text);
             if (ret == BAD_REQUEST)
                 return BAD_REQUEST;
             break;
         }
-        case CHECK_STATE_HEADER:
+        case CHECK_STATE_HEADER: /*第二个状态，分析头部字段*/
         {
             ret = parse_headers(text);
             if (ret == BAD_REQUEST)
@@ -370,7 +400,7 @@ http_conn::HTTP_CODE http_conn::process_read()
             }
             break;
         }
-        case CHECK_STATE_CONTENT:
+        case CHECK_STATE_CONTENT: /*第三个状态，检测数据完整性*/
         {
             ret = parse_content(text);
             if (ret == GET_REQUEST)
@@ -521,31 +551,39 @@ http_conn::HTTP_CODE http_conn::do_request()
 
 void http_conn::unmap()
 {
+    // 如果客户请求的目标文件已经被mmap映射，就解除映射
     if (m_file_address)
     {
         munmap(m_file_address, m_file_stat.st_size);
         m_file_address = 0;
     }
 }
+
 bool http_conn::write()
 {
     int temp = 0;
 
+    // 如果没有任何需要传输的树，就直接重置链接。
     if (bytes_to_send == 0)
     {
+        // 将m_sockfd设置成EPOLLOUT，表示当前文件描述符可读，后续websever会跳转到读
         modfd(m_epollfd, m_sockfd, EPOLLIN, m_TRIGMode);
         init();
         return true;
     }
 
+    // 循环写入（发送）
     while (1)
     {
+        // 将服务器应答报文的http头和客户端请求的文件集中写入，temp为写入的字节数
         temp = writev(m_sockfd, m_iv, m_iv_count);
 
+        // 如果错误为EAGAIN表示writev已经将发送缓冲区中内容全部写入，返回true；否者解除文件映射，返回false
         if (temp < 0)
         {
             if (errno == EAGAIN)
             {
+                // 写完了就将m_sockfd设置成EPOLLOUT，表示当前文件描述符可写
                 modfd(m_epollfd, m_sockfd, EPOLLOUT, m_TRIGMode);
                 return true;
             }
@@ -567,11 +605,13 @@ bool http_conn::write()
             m_iv[0].iov_len = m_iv[0].iov_len - bytes_have_send;
         }
 
+        // 发送完毕
         if (bytes_to_send <= 0)
         {
             unmap();
             modfd(m_epollfd, m_sockfd, EPOLLIN, m_TRIGMode);
 
+            // 如果开启了keep-alive，就重置链接之后继续打开链接，否则关闭连接
             if (m_linger)
             {
                 init();
@@ -584,6 +624,7 @@ bool http_conn::write()
         }
     }
 }
+
 bool http_conn::add_response(const char *format, ...)
 {
     if (m_write_idx >= WRITE_BUFFER_SIZE)
@@ -632,11 +673,13 @@ bool http_conn::add_content(const char *content)
 {
     return add_response("%s", content);
 }
+
+
 bool http_conn::process_write(HTTP_CODE ret)
 {
     switch (ret)
     {
-    case INTERNAL_ERROR:
+    case INTERNAL_ERROR: // 状态码500：服务器错误
     {
         add_status_line(500, error_500_title);
         add_headers(strlen(error_500_form));
@@ -644,7 +687,7 @@ bool http_conn::process_write(HTTP_CODE ret)
             return false;
         break;
     }
-    case BAD_REQUEST:
+    case BAD_REQUEST: // 状态码404：请求的资源不存在
     {
         add_status_line(404, error_404_title);
         add_headers(strlen(error_404_form));
@@ -652,7 +695,7 @@ bool http_conn::process_write(HTTP_CODE ret)
             return false;
         break;
     }
-    case FORBIDDEN_REQUEST:
+    case FORBIDDEN_REQUEST: // 状态码403：当前资源禁止访问
     {
         add_status_line(403, error_403_title);
         add_headers(strlen(error_403_form));
@@ -660,12 +703,13 @@ bool http_conn::process_write(HTTP_CODE ret)
             return false;
         break;
     }
-    case FILE_REQUEST:
+    case FILE_REQUEST:  // 状态码200：一切正常
     {
         add_status_line(200, ok_200_title);
         if (m_file_stat.st_size != 0)
         {
-            add_headers(m_file_stat.st_size);
+            add_headers(m_file_stat.st_size); // 添加首部行
+            /* 下面使用集中写 */
             m_iv[0].iov_base = m_write_buf;
             m_iv[0].iov_len = m_write_idx;
             m_iv[1].iov_base = m_file_address;
@@ -674,6 +718,7 @@ bool http_conn::process_write(HTTP_CODE ret)
             bytes_to_send = m_write_idx + m_file_stat.st_size;
             return true;
         }
+        /* 若目标文件为空，直接返回一个空的html */
         else
         {
             const char *ok_string = "<html><body></body></html>";
@@ -691,6 +736,7 @@ bool http_conn::process_write(HTTP_CODE ret)
     bytes_to_send = m_write_idx;
     return true;
 }
+
 void http_conn::process()
 {
     HTTP_CODE read_ret = process_read();

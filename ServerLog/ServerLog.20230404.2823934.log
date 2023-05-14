@@ -1,0 +1,170 @@
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): POST /0 HTTP/1.1
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Host: 117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Length: 0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): 
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:724
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:724
+Connection:close
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:724
+Connection:close
+
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): POST /1 HTTP/1.1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Host: 117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Length: 0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): 
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+Connection:close
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+Connection:close
+
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): POST /1 HTTP/1.1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Host: 117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Length: 0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:194(deal_timer): close fd 15
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): 
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:194(deal_timer): close fd 16
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+Connection:close
+
+[INFO][2023-04-04 20:37:03.094][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+Connection:close
+
+
+[INFO][2023-04-04 20:37:03.094][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:194(deal_timer): close fd 17
+[INFO][2023-04-04 20:37:21.655][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:37:43.975][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:37:58.330][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:37:58.330][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:37:59.093][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): POST /1 HTTP/1.1
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Host: 117.78.8.174:9006
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Length: 0
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Encoding: gzip, deflate
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Cache-Control: max-age=0
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Content-Type: application/x-www-form-urlencoded
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Origin: http://117.78.8.174:9006
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Referer: http://117.78.8.174:9006/
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:324(parse_headers): oop!unknow header: Upgrade-Insecure-Requests: 1
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:352(process_read): 
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+Connection:close
+
+[INFO][2023-04-04 20:37:59.093][2823944]/home/Practice/Giles_WebServer/HttpConn/http_conn.cpp:602(add_response): request:HTTP/1.1 200 OK
+Content-Length:725
+Connection:close
+
+
+[INFO][2023-04-04 20:37:59.093][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:194(deal_timer): close fd 16
+[INFO][2023-04-04 20:38:06.122][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:38:06.122][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:38:06.123][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:38:24.157][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:38:24.157][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:38:24.158][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:40:10.656][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick
+[INFO][2023-04-04 20:40:19.885][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:312(dealwithread): deal with the client(113.57.237.69)
+[INFO][2023-04-04 20:40:20.890][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:183(adjust_timer): adjust timer once
+[INFO][2023-04-04 20:40:20.890][2823934]/home/Practice/Giles_WebServer/Server/webserver.cpp:427(eventLoop): timer tick

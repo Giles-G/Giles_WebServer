@@ -49,6 +49,11 @@ public:
 class connectionRAII{
 
 public:
+	/**
+	 * @brief 获取一个mysql句柄指针，并且放入SQL
+	 * @param SQL 因为需要将获取的mysql句柄指针存入SQL，所以SQL是一个指向指针的指针
+	 * @param connPool 数据连接池的指针
+	 */
 	connectionRAII(MYSQL **con, connection_pool *connPool);
 	~connectionRAII();
 	
